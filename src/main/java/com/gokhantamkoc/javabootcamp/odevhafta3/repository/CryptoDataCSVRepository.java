@@ -20,21 +20,20 @@ public class CryptoDataCSVRepository implements CSVRepository {
 		try {
 			BufferedReader bf =new BufferedReader(inputStreamReader);
 			String line;
-			List<String> temp;
 			while ((line = bf.readLine())!=null){
-				temp = List.of(line.split(COMMA_DELIMITER));
+				String[] temp = line.split(COMMA_DELIMITER);
 
 				// control for ignoring csv headers unix,date,symbol,open,high,low,close,volume,tradecount
-				if(temp.get(0).equals("unix")){
+				if(temp[0].equals("unix")){
 					continue;
 				}
 				// parsing string to long and double
-				long time = Long.parseLong(temp.get(0));
-				double open = Double.parseDouble(temp.get(3));
-				double high = Double.parseDouble(temp.get(4));
-				double low = Double.parseDouble(temp.get(5));
-				double close = Double.parseDouble(temp.get(6));
-				double volume = Double.parseDouble(temp.get(7));
+				long time = Long.parseLong(temp[0]);
+				double open = Double.parseDouble(temp[3]);
+				double high = Double.parseDouble(temp[4]);
+				double low = Double.parseDouble(temp[5]);
+				double close = Double.parseDouble(temp[6]);
+				double volume = Double.parseDouble(temp[7]);
 
 				Candle candle = new Candle(time,open,high,low,close,volume);
 				candles.add(candle);
